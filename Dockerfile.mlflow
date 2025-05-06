@@ -1,0 +1,14 @@
+FROM python:3.10.12
+
+# установка MLflow
+RUN pip install --no-cache-dir mlflow
+
+# директория для MLflow
+RUN mkdir -p /mlflow/mlruns
+
+# запускаем сервер
+CMD ["mlflow", "server", \
+     "--backend-store-uri", "/mlflow/mlruns", \
+     "--default-artifact-root", "/mlflow/mlruns", \
+     "--host", "0.0.0.0", \
+     "--port", "5000"]

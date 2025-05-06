@@ -1,0 +1,8 @@
+# requirements.txt
+torch
+torchvision
+Pillow
+python-telegram-bot
+nest-asyncio
+numpy
+mlflow

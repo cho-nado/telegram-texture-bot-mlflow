@@ -1,0 +1,17 @@
+services:
+  bot:
+    build: .
+    environment:
+      - TELEGRAM_TOKEN_TEXTURE
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    depends_on:
+      - mlflow
+
+  mlflow:
+    build:
+      context: .
+      dockerfile: Dockerfile.mlflow
+    ports:
+      - "8001:5000"
+    volumes:
+      - ./mlruns:/mlflow/mlruns
