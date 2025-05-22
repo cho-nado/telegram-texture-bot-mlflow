@@ -1,4 +1,4 @@
-<img width="1177" alt="Screenshot 2025-05-22 at 11 18 02 PM" src="https://github.com/user-attachments/assets/e79be261-54ac-4258-a6ef-ffba47e3368a" /># Telegram texture bot with mlflow
+# Telegram texture bot with mlflow
 
 ## What This Project Is?
 A Telegram bot that recognizes image textures using a fine-tuned ResNet-50 model. Users send a photo via Telegram, and the bot replies with a predicted texture class (from 47 DTD categories) and its confidence score.
