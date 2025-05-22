@@ -1,10 +1,10 @@
 name: CD
 
-on:
-  push:
-    branches: [ main ]
-    # или можно запускать по релизу, если хотите: 
-    # tags: [ 'v*.*.*' ]
+# on:
+#   push:
+#     branches: [ main ]
+#     # или можно запускать по релизу, если хотите: 
+#     # tags: [ 'v*.*.*' ]
 
 jobs:
   deploy-infra:
