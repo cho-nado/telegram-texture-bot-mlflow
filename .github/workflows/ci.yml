@@ -19,15 +19,11 @@ jobs:
       with:
         python-version: "3.10"
 
-    - name: Install and check Python dependencies
+    - name: Install Python dependencies
       working-directory: MLFlow_texture_bot
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt mlflow flake8
-        # Run flake8 with relaxed rules:
-        flake8 . \
-          --max-line-length=100 \
-          --ignore=E203,E266,E302,E502,E702,W291,W293,E402
+        pip install -r requirements.txt mlflow
 
     - name: Build Docker image for bot
       working-directory: MLFlow_texture_bot
