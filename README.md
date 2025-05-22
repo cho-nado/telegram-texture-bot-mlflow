@@ -1,42 +1,54 @@
 # Telegram Texture Bot + Terraform Infrastructure
 
-Этот репозиторий содержит два проекта:
+This repository contains two projects:
 
 ---
 
 ## 📦 `MLFlow_texture_bot`
 
-Проект включает:
-- Telegram-бота для классификации текстур изображений;
-- Сервер `MLFlow` для логгирования экспериментов;
-- План по интеграции CI/CD и автоматизации трекинга моделей.
+The project includes:
 
-### 🛠️ Как запустить
+- A Telegram bot for classifying image textures;
 
-1. Установите зависимости (через `requirements.txt` или `pip install`).
+- An MLflow server for experiment logging;
 
-2. Запустите Telegram-бота, указав токен и путь к модели (подробности как конкретно запускать внутри проекта).
+- A plan for integrating CI/CD and automating model tracking.
 
-3. Бот будет принимать изображения и предсказывать текстуру, логируя результат в MLFlow.
+---
+### 🛠️ How to Run
 
-## Зачем MLFlow? 
+1. Install dependencies (using requirements.txt or pip install).
 
-MLFlow позволяет:
-- отслеживать все эксперименты (модель, метрики, дата);
-- повторять обучения с теми же параметрами;
-- централизованно управлять версиями моделей.
+2. Start the Telegram bot, providing the token and the model path (see project docs for exact instructions).
+
+3. The bot will accept images, predict their texture class, and log the results to MLflow.
+
+---
+## Why MLflow? 
+**(check details in the project)**
+
+MLflow enables you to:
+
+- Track all experiments (model versions, metrics, dates);
+
+- Reproduce training runs with the same parameters;
+
+- Centrally manage model versions.
 
 ---
 
 ## ☁️ Terraform
 
-Конфигурация развёртывает инфраструктуру в Yandex Cloud, включая:
+This configuration deploys infrastructure on Yandex Cloud, including:
 
-- S3-бакет (Object Storage) для хранения файлов;
-- Виртуальную машину, которая автоматически загружает файл в бакет через cloud-init;
-- Сеть и подсеть для работы ВМ.
+- An S3 bucket (Object Storage) for file storage;
 
-### 🛠️ Как запустить
+- A virtual machine that automatically uploads a file to the bucket via cloud-init;
+
+- A network and subnet for the VM.
+
+---
+### 🛠️  How to Run
 
 ```bash
 cd Terraform
@@ -44,11 +56,13 @@ terraform init
 terraform apply
 ```
 
-После запуска:
-- В Yandex.Cloud появится бакет (например, ilartstu-mlflow);
-- ВМ зальёт в него файл test.txt.
+After deployment:
 
-Для удаления:
+- A bucket will appear in Yandex.Cloud (e.g., ilartstu-mlflow);
+
+- The VM will upload the file test.txt to it.
+
+To tear down:
 
 ```bash
 terraform destroy
