@@ -1,4 +1,4 @@
-# Telegram texture bot with mlflow
+<img width="1177" alt="Screenshot 2025-05-22 at 11 18 02 PM" src="https://github.com/user-attachments/assets/e79be261-54ac-4258-a6ef-ffba47e3368a" /># Telegram texture bot with mlflow
 
 ## What This Project Is?
 A Telegram bot that recognizes image textures using a fine-tuned ResNet-50 model. Users send a photo via Telegram, and the bot replies with a predicted texture class (from 47 DTD categories) and its confidence score.
@@ -74,6 +74,17 @@ http://localhost:8001
 ## Where to Analyze Results
 - MLflow UI (http://localhost:8001) lists all inference runs.
 - Compare multiple runs side-by-side to see confidence distributions or class frequencies.
+
+### Examples of MLFlow work
+<img width="1357" alt="Screenshot 2025-05-22 at 11 14 39 PM" src="https://github.com/user-attachments/assets/9927db50-3f83-419b-b13f-27eb83d9852d" />
+
+<img width="1357" alt="Screenshot 2025-05-22 at 11 14 12 PM" src="https://github.com/user-attachments/assets/f8f997b1-15fc-4203-8c1e-7794a760eb6d" />
+
+### Examples of Bot work
+<img width="1177" alt="Screenshot 2025-05-22 at 11 18 02 PM" src="https://github.com/user-attachments/assets/3237c769-0083-46c0-a0c7-e796a1649c2d" />
+
+<img width="1177" alt="Screenshot 2025-05-22 at 11 18 12 PM" src="https://github.com/user-attachments/assets/051f3a96-9c76-49d9-b462-accf2ab1c385" />
+
 
 ---
 ## What You Can Analyze via MLflow UI
