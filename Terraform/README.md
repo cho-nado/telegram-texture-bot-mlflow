@@ -1,102 +1,91 @@
-# MLOps Project: Terraform-проект для создания S3-бакета и ВМ в Yandex Cloud
+# Terraform-project using Yandex Cloud
 
-## 📘 Описание проекта
+## 📦 Description of the project
 
-Проект представляет собой пример инфраструктуры как кода (IaC) на базе Terraform, предназначенной для развёртывания ресурсов в Yandex Cloud. В процессе автоматически создаются:
+This project is an example of Infrastructure as Code (IaC) using Terraform, designed to deploy resources in Yandex Cloud. The setup automatically creates:
 
-- **S3-бакет** — облачное хранилище для файлов;
-- **Виртуальная машина (VM)** — настраивается через `cloud-init`, получает доступ к S3 с использованием AWS CLI;
-- **Сетевая инфраструктура** — VPC и подсеть для размещения ВМ.
+- **S3 Bucket** — a cloud-based file storage;
+- **Virtual Machine (VM)** — configured via cloud-init, with access to the S3 bucket using AWS CLI;
+- **Network infrastructure** — including a VPC and subnet for hosting the VM.
 
-Совокупно демонстрируются принципы **модульности**, **переиспользуемости**, а также **безопасной и управляемой автоматизации облачных ресурсов**.
-
----
-
-## 🧩 Что такое Terraform и зачем он нужен
-
-[Terraform]— это инструмент для управления инфраструктурой с помощью кода (Infrastructure as Code, **IaC**), разработанный компанией HashiCorp.
-
-### Преимущества Terraform:
-
-- ✅ **Декларативный подход**: описывается *что должно быть*, а не *как это создать*.
-- ♻️ **Идемпотентность**: повторный запуск `apply` не приведёт к повторному созданию ресурсов.
-- 🧩 **Поддержка модулей**: легко повторно использовать конфигурации и делить проект на логические части.
-- ☁️ **Мультиоблачность**: работает не только с Yandex Cloud, но и с AWS, GCP, Azure и др.
-- 🔒 **Контроль версий**: конфигурации хранятся в Git и могут отслеживаться как обычный код.
-- 🚀 **Автоматизация CI/CD**: Terraform можно использовать в DevOps пайплайнах, интегрируя его с GitHub Actions, GitLab CI и др.
-
-Terraform — это современный стандарт в управлении инфраструктурой, позволяющий сделать её предсказуемой, воспроизводимой и удобной для командной работы.
+The project demonstrates principles of modularity, reusability, and secure, manageable cloud automation.
 
 ---
 
-## 🗂️ Структура проекта
+## What is Terraform? 
+
+Terraform is an Infrastructure as Code (IaC) tool developed by HashiCorp, used for provisioning and managing cloud infrastructure through declarative configuration files.
+
+### Benefits of Terraform:
+
+- **Declarative approach:** you define what should exist, not how to create it.
+- **Idempotency:** running terraform apply multiple times won’t recreate resources if nothing has changed.
+- **Module support:** easily reuse configuration blocks and break your infrastructure into logical, maintainable parts.
+- **Multi-cloud support:** works with Yandex Cloud, AWS, GCP, Azure, and many other providers.
+- **Version control friendly:** configurations can be stored in Git and tracked like any other code.
+- **CI/CD automation:** Terraform integrates smoothly with DevOps pipelines such as GitHub Actions, GitLab CI, and others.
+
+
+---
+
+## Structure of the project
 
 ```
-.
-├── .gitignire
-├── cloud-init.yaml
-├── main.tf
-├── provider.tf
-├── sa-key.json
-├── terraform.tfvars
-├── variables.tf
+Terraform/
+├── main.tf                  # Main logic: VM, networking, and S3 module connection
+├── provider.tf              # Yandex.Cloud provider configuration
+├── variables.tf             # Declaration of input variables
+├── terraform.tfvars         # Variable values (e.g., cloud_id, folder_id, service account key)
+├── sa-key.json              # Service account key (used for Terraform authentication)
+├── cloud-init.yaml          # Cloud-init script to configure the VM on first boot
+├── terraform.tfstate        # Terraform state file (auto-generated)
+├── terraform.tfstate.backup # Backup of the previous state (auto-generated)
+├── tfplan                   # Terraform plan file (can be generated manually)
+├── nametest                 # Optional test file (if used)
+├── README.md                # Project instructions (can be extended)
 └── modules/
-    └── s3/
+    └── s3/                  # Reusable module for creating the Object Storage (S3 bucket)
         ├── main.tf
         ├── outputs.tf
         ├── variables.tf
         └── versions.tf
+
 ```
 
-## ⚙️ Как это работает
+## 🛠️ How To Run
 
-1. **Инициализация Terraform**:  
-   `terraform init`
+1. **Initialize Terraform**:  
 
-2. **Планирование изменений**:  
-   `terraform plan -out=nametest`
+```
+terraform init
+```
 
-3. **Применение изменений**:  
-   `terraform apply "nametest"`
+2. **Plan the changes**:
 
-4. **VM настраивается автоматически**:  
-   Скрипт `cloud-init.yaml` устанавливает AWS CLI, прописывает ключи и загружает файл в S3.
+``` 
+terraform plan
+```
 
-В результате:
-- Создаются ресурсы в Yandex Cloud.
-- ВМ автоматически настраивается и получает доступ к S3-бакету.
-- Всё управляется и отслеживается через Terraform.
+3. **Apply the changes**:  
+
+```
+terraform apply
+```
+
+4. **The VM is configured automatically**:  
+   The cloud-init.yaml script installs AWS CLI, sets up credentials, and uploads a file to the S3 bucket.
+
+As a result:
+- Resources are created in Yandex Cloud.
+
+- The VM is auto-configured and gains access to the S3 bucket.
+
+- Everything is managed and tracked through Terraform.
 
 ---
 
-## 🎯 Полезность проекта
-
-- **Автоматизация**: нет необходимости вручную настраивать инфраструктуру.
-- **Масштабируемость**: подход легко адаптируется под несколько бакетов или машин.
-- **Повторяемость**: проект можно легко развернуть в любой момент с теми же параметрами.
-- **Разделение на модули**: упрощает повторное использование кода и поддержку.
-- **Практика IaC (Infrastructure as Code)**: улучшает управляемость и версионирование инфраструктуры.
-
----
-
-## ✅ Требования
+## Requirements
 
 - Terraform
-- Аккаунт в Yandex Cloud
-- Сервисный аккаунт с ролями
-
----
-
-## 📝 Заключение
-
-Проект выполнен в рамках практического задания.  
-Все настройки протестированы в среде Yandex Cloud.
-
-Возможные сценарии использования:
-
-- Создание учебных и тестовых окружений.
-- Хранение данных с доступом из облачных ВМ.
-- Быстрое прототипирование проектов.
-- Демонстрация DevOps-автоматизации в дальнейшей работе.
-
-Таким образом, проект получился несложный, но послужил наглядным примером эффективности использования Terraform для развёртывания инфраструктуры в Yandex Cloud. Подчеркнул ценность подхода Infrastructure as Code, а так же возможности к масштабируемым и надёжным облачным решениям.
+- Account in Yandex Cloud
+- Service accound with roles
