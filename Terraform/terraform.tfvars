@@ -1,0 +1,5 @@
+cloud_id                 = "b1g4j4f8jolbd5cok8k9"
+folder_id                = "b1gqnatp7fp9mmei4q2f"
+service_account_key_file = "sa-key.json"
+bucket_name              = "ilartstu-mlflow"
+bucket_acl               = "private"
