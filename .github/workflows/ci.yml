@@ -32,11 +32,27 @@ jobs:
     - name: Init & validate Terraform, then plan
       working-directory: Terraform
       run: |
-        # Install Terraform
-        curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor > hashicorp.gpg
-        sudo install -o root -g root -m 644 hashicorp.gpg /usr/share/keyrings/
-        sudo apt-get update && sudo apt-get install -y terraform
-        # Terraform steps
+        # 1) Устанавливаем необходимые утилиты
+        sudo apt-get update
+        sudo apt-get install -y \
+          gnupg software-properties-common curl lsb-release
+
+        # 2) Добавляем GPG-ключ и репозиторий HashiCorp
+        curl -fsSL https://apt.releases.hashicorp.com/gpg | \
+          sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+          https://apt.releases.hashicorp.com \
+          $(lsb_release -cs) main" | \
+          sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+        # 3) Устанавливаем Terraform
+        sudo apt-get update
+        sudo apt-get install -y terraform
+
+        # 4) Проверяем Terraform
+        terraform version
+
+        # 5) Инициализируем, валидируем и планим
         terraform init -input=false
         terraform validate
         terraform plan -out=tfplan
