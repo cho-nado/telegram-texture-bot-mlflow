@@ -87,7 +87,7 @@ http://localhost:8001
 - **Reproducibility:** every inference is logged with exact code & environment versions.
 
 
-
+--- 
 ## Why All This?
 - **Experiment tracking** ensures every prediction is recorded—no more “I forgot what parameters I used.”
 
@@ -95,6 +95,7 @@ http://localhost:8001
 
 - **Scalability:** laying this MLOps foundation lets you later add training runs, hyperparameter sweeps, model registry, etc.
 
+---
 ## Why Use MLflow for a Small Project?
 
 - Even simple inference projects benefit from **structured logging**—you’ll never lose track of which images gave low confidence or unexpected classes.
