@@ -83,6 +83,13 @@ As a result:
 - Everything is managed and tracked through Terraform.
 
 ---
+## Examples of work: 
+<img width="1388" alt="Screenshot 2025-05-22 at 11 20 52 PM" src="https://github.com/user-attachments/assets/ba202dbe-4d5c-4a31-be14-703147233ac1" />
+
+<img width="1394" alt="Screenshot 2025-05-22 at 11 22 11 PM" src="https://github.com/user-attachments/assets/1f4ddb5c-a0b5-4f36-b665-544a62dc2a2d" />
+
+
+---
 
 ## Requirements
 
