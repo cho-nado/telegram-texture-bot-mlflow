@@ -69,6 +69,28 @@ terraform destroy
 
 ```
 
+---
+## 🚀 CI/CD Pipeline
+
+To ensure code quality and reliable infrastructure changes, this project uses a **CI/CD** pipeline powered by **GitHub Actions**. Every time you push to `main` or open a pull request, the workflow automatically:
+
+1. **Checks out** the repository  
+2. **Sets up Python 3.10**  
+3. **Installs and verifies** Python dependencies (`requirements.txt` + `mlflow`)  
+4. **Builds the Docker image** for the Telegram texture bot  
+5. **Initializes, validates & plans** Terraform configuration  
+
+This gives us instant feedback if:
+- Any Python dependency is broken  
+- The Dockerfile has syntax errors  
+- The Terraform code contains misconfigurations  
+
+<img width="1478" alt="Screenshot 2025-05-23 at 12 21 38 AM" src="https://github.com/user-attachments/assets/25438ab3-4021-4544-91b7-de105b1791d2" />
+
+
+By automating these steps, we catch issues early, maintain reproducibility, and guarantee that both the application and its infrastructure are always in a deployable state.  
+
+
 
 
 
